@@ -10,7 +10,7 @@ export default function EntradaPage() {
     const [description, setDescription] = useState('')
     const navigate = useNavigate()
     const { token } = useContext(UserContext)
-    console.log(token)
+    
 
     function novaEntrada(e) {
         e.preventDefault()

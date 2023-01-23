@@ -10,7 +10,7 @@ export default function SaidaPage() {
     const [description, setDescription] = useState('')
     const navigate = useNavigate()
     const { token } = useContext(UserContext)
-    console.log(token)
+    
 
     function novaSaida(e) {
         e.preventDefault()

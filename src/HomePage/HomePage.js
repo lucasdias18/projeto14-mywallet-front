@@ -4,6 +4,7 @@ import styled from "styled-components";
 import UserContext from "../context";
 import ent from "../assets/Mais.png"
 import sai from "../assets/Menos.png"
+import logout from "../assets/Logout.png"
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
@@ -36,7 +37,7 @@ export default function HomePage() {
             <Container>
                 <Topo>
                     <Titulo>Olá, { user.name }</Titulo>
-                    {/* <Botao></Botao> */}
+                    <img src={logout} />
                 </Topo>
                 
                 <Registros>
@@ -51,10 +52,10 @@ export default function HomePage() {
                                 )
                                 
                             })}
-                            <Saldo>Saldo {movimento.total}</Saldo> 
+                            {/* <Saldo>Saldo {movimento.total}</Saldo> */}
                         </>
                     }
-                    {/* <Saldo>Saldo {movimento.total}</Saldo> */}
+                    <SaldoTexto>Saldo</SaldoTexto>
                 </Registros>
                 <ContainerActions>
                     <NovaEntrada onClick={() => navigate('/nova-entrada')}>
@@ -73,22 +74,44 @@ export default function HomePage() {
 
 function Registro(props) {
     return (
-            <ContainerRegistro>
-                <Dia>{props.day}</Dia>
-                <Descricao>{props.description}</Descricao>
-                <ValorS>{props.valueS}</ValorS>
-                <ValorE>{props.valueE}</ValorE>
-            </ContainerRegistro>
+            <>
+                <ContainerRegistro>
+                    <Dia>{props.day}</Dia>
+                    <Descricao>{props.description}</Descricao>
+                    <ValorS>{props.valueS}</ValorS>
+                    <ValorE>{props.valueE}</ValorE>
+                </ContainerRegistro>
+                <Saldo>{props.total}</Saldo>
+            </>
     )
 }
 
-const Saldo = styled.h1``
+const Saldo = styled.h1`
+// color: ${props => props.total>=0 ? '#03AC00' : '#C70000'};
+color: blue;
+// position: absolute;
+// bottom: 10px;
+// right: 24px;
+margin-top: 20px;
+text-align: center;
+`
+
+const SaldoTexto = styled.h1`
+color: #00000;
+text-align: center;
+// position: absolute;
+// bottom: 10px;
+// left: 24px;
+`
 
 const Container = styled.div`
 padding: 25px 24px 0px 24px;
 `
 
-const Topo = styled.div``
+const Topo = styled.div`
+display: flex;
+justify-content: space-between;
+`
 
 const Titulo = styled.h1`
 font-family: Raleway;
@@ -103,6 +126,8 @@ const Registros = styled.div`
 height: 446px;
 border-radius: 5px;
 background-color: #FFFFFF;
+position: relative;
+overflow: scroll;
 `
 
 const ContainerRegistro = styled.div`
