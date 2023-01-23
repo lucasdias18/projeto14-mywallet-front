@@ -2,14 +2,17 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import UserContext from "../context";
+import ent from "../assets/Mais.png"
+import sai from "../assets/Menos.png"
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
     const { token } = useContext(UserContext)
-    // console.log(token)
     const [saidas, setSaidas] = useState(undefined)
     const [entradas, setEntradas] = useState(undefined)
     const [movimento, setMovimento] = useState(undefined)
     const [user, setUser] = useState(undefined)
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -20,22 +23,14 @@ export default function HomePage() {
             })
             .catch((resp) => console.log(resp.response.data))
 
-        // axios.get(`${process.env.REACT_APP_API_URL}/saidas`, {headers: {Authorization:`Bearer ${token}`}})
-        //     .then((resp) => {
-        //         setSaidas(resp.data)
-        //         setMovimento([...saidas, ...entradas])
-        //     })
-        //     .catch((resp) => console.log(resp.response.data))
-
             axios.get(`${process.env.REACT_APP_API_URL}/user`, {headers: {Authorization:`Bearer ${token}`}})
                 .then((res) => {
                     setUser(res.data)
                 })
                 .catch((err) => console.log(err.data))
             
-            
-
     }, []);
+
     if(user !== undefined) {
         return (
             <Container>
@@ -46,17 +41,30 @@ export default function HomePage() {
                 
                 <Registros>
                     {
-                        movimento===undefined? <div>Não há registros de
-                        entrada ou saída</div> : movimento.map((p) => {
-                            return (
-                                <Registro description={p.description} valueS={p.valueS} valueE={p.valueE} day={p.day} />
-                            )
-                        })
+                        <>
+                            {movimento===undefined? <div>Não há registros de
+                            entrada ou saída</div> : movimento.map((p) => {
+                                return (
+                                    <>
+                                        <Registro description={p.description} valueS={p.valueS} valueE={p.valueE} day={p.day} total={p.total} />
+                                    </>
+                                )
+                                
+                            })}
+                            <Saldo>Saldo {movimento.total}</Saldo> 
+                        </>
                     }
+                    {/* <Saldo>Saldo {movimento.total}</Saldo> */}
                 </Registros>
                 <ContainerActions>
-                    <NovaEntrada></NovaEntrada>
-                    <NovaSaida></NovaSaida>
+                    <NovaEntrada onClick={() => navigate('/nova-entrada')}>
+                        <img src={ent} />
+                        <Texto>Nova entrada</Texto>
+                    </NovaEntrada>
+                    <NovaSaida onClick={() => navigate('/nova-saida')}>
+                        <img src={sai} />
+                        <Texto>Nova saída</Texto>
+                    </NovaSaida>
                 </ContainerActions>
             </Container>
         )
@@ -73,6 +81,8 @@ function Registro(props) {
             </ContainerRegistro>
     )
 }
+
+const Saldo = styled.h1``
 
 const Container = styled.div`
 padding: 25px 24px 0px 24px;
@@ -154,3 +164,5 @@ width: 155px;
 border-radius: 5px;
 background-color: #A328D6;
 `
+
+const Texto = styled.h1``

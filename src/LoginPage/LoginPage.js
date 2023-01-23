@@ -16,7 +16,6 @@ export default function LoginPage() {
     function login(e) {
         e.preventDefault()
         const data = { email, password }
-        console.log(data)
         axios.post(`${process.env.REACT_APP_API_URL}/login`, data)
             .then(resp)
             .catch((err) => console.log(err))
