@@ -16,7 +16,6 @@ export default function SignUp() {
     function handleSubmit(e) {
         e.preventDefault()
         const data = { email, name, password, confirmPassword }
-        console.log(data)
         axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, data)
             .then((resp) => {
                 navigate('/')

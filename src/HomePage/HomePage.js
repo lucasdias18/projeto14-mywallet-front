@@ -49,7 +49,7 @@ export default function HomePage() {
                 <Registros>
                     {
                         <>
-                            {movimento===undefined? <div>Não há registros de
+                            {movimento===undefined? <div className="sem-registro">Não há registros de
                             entrada ou saída</div> : movimento.map((p) => {
                                 return (
                                     <>
