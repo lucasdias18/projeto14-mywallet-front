@@ -15,6 +15,10 @@ export default function HomePage() {
     const [user, setUser] = useState(undefined)
     const navigate = useNavigate()
 
+    function deslogar() {
+        navigate('/')
+    }
+
 
     useEffect(() => {
 
@@ -37,7 +41,9 @@ export default function HomePage() {
             <Container>
                 <Topo>
                     <Titulo>Olá, { user.name }</Titulo>
-                    <img src={logout} />
+                    <Botao onClick={deslogar}>
+                        <img src={logout} />
+                    </Botao>
                 </Topo>
                 
                 <Registros>
@@ -52,7 +58,6 @@ export default function HomePage() {
                                 )
                                 
                             })}
-                            {/* <Saldo>Saldo {movimento.total}</Saldo> */}
                         </>
                     }
                     <SaldoTexto>Saldo</SaldoTexto>
@@ -86,22 +91,19 @@ function Registro(props) {
     )
 }
 
+const Botao = styled.button`
+background-color: #8C11BE;
+`
+
 const Saldo = styled.h1`
-// color: ${props => props.total>=0 ? '#03AC00' : '#C70000'};
-color: blue;
-// position: absolute;
-// bottom: 10px;
-// right: 24px;
+color: #52B6FF;
 margin-top: 20px;
 text-align: center;
 `
 
 const SaldoTexto = styled.h1`
-color: #00000;
+color: #000000;
 text-align: center;
-// position: absolute;
-// bottom: 10px;
-// left: 24px;
 `
 
 const Container = styled.div`
@@ -111,6 +113,10 @@ padding: 25px 24px 0px 24px;
 const Topo = styled.div`
 display: flex;
 justify-content: space-between;
+img {
+    height: 24px;
+    width: 23px;
+}
 `
 
 const Titulo = styled.h1`
@@ -142,7 +148,6 @@ font-size: 16px;
 font-weight: 400;
 line-height: 19px;
 color: #000000;
-// text-align: left;
 `
 
 const ValorE = styled.p`
