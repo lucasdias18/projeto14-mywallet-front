@@ -132,7 +132,6 @@ const Registros = styled.div`
 height: 446px;
 border-radius: 5px;
 background-color: #FFFFFF;
-position: relative;
 overflow: scroll;
 `
 

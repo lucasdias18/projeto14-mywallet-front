@@ -14,7 +14,8 @@ export default function EntradaPage() {
 
     function novaEntrada(e) {
         e.preventDefault()
-        const data = { valueE: valor, description }
+        const valueE = valor.replace(',', '.')
+        const data = { valueE, description }
         axios.post(`${process.env.REACT_APP_API_URL}/nova-entrada`, data, {headers: {Authorization:`Bearer ${token}`}})
             .then(resp => navigate('/home'))
             .catch((err) => console.log(err.response.data))

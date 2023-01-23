@@ -14,7 +14,8 @@ export default function SaidaPage() {
 
     function novaSaida(e) {
         e.preventDefault()
-        const data = { valueS: valor, description }
+        const valueS = valor.replace(',', '.')
+        const data = { valueS, description }
         axios.post(`${process.env.REACT_APP_API_URL}/nova-saida`, data, {headers: {Authorization:`Bearer ${token}`}})
             .then(resp => navigate('/home'))
             .catch((err) => console.log(err.response.data))
